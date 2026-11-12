@@ -1,0 +1,13 @@
+# Render 部署設定。把整個 lotus-bf 資料夾（含 lotus-bf/ 與 local_api/）推到 GitHub 後，
+# 在 Render 建立 Blueprint 時會自動讀這個檔。
+services:
+  - type: web
+    name: lotus-bf
+    runtime: python
+    rootDir: local_api
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    envVars:
+      - key: FRONTEND_DIST
+        value: ../lotus-bf/dist
+    plan: free
